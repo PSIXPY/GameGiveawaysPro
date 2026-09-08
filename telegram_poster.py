@@ -15,9 +15,9 @@ TG_CHAT_ID = os.environ.get("TG_CHAT_ID")
 # ==========================================
 # ВАЖНЫЕ ССЫЛКИ ПРОЕКТА
 # ==========================================
-APP_LINK = "https://github.com/TaJIanT/GameGiveawaysPro/releases/latest"
-VK_GROUP_URL = "https://vk.ru/gamegiveawaysprokanal"
-TG_CHANNEL_URL = "https://t.me/ggpro_free_games"
+APP_LINK = "https://clck.ru/34QGq6"  # Ваш Discord
+VK_GROUP_URL = "https://clck.ru/34QGzY"  # Ваша группа ВКонтакте
+TG_CHANNEL_URL = "https://t.me/eternalparadiseforum"  # Ваш форум в Telegram
 
 # ==========================================
 # ПОПУЛЯРНЫЕ ТЕГИ ДЛЯ РАНДОМИЗАЦИИ
@@ -79,18 +79,18 @@ def process_and_send_game(game):
     link = game.get("link", "")
     img_url = game.get("image", "")
     desc = game.get("description", "")
-    
+
     is_free = price_raw.upper() == "FREE"
     hashtag_plat = platform.replace(" ", "").replace("-", "").replace("®", "").replace("™", "").replace("(", "").replace(")", "")
-    
+
     # Генерация 3 случайных популярных тегов
     random_tags = " ".join(random.sample(POPULAR_TAGS, 3))
-    
+
     if desc:
         desc = desc.replace("<br>", "").replace("\n", " ")
         if len(desc) > 180:
             desc = desc[:177] + "..."
-            
+
     # Определяем заголовки и основные теги
     if platform_key == "roblox" or "roblox" in platform.lower():
         header, vk_header, tag_type = random.choice(HEADERS_ROBLOX), random.choice(HEADERS_ROBLOX), "#roblox #роблокс"
@@ -135,17 +135,17 @@ def process_and_send_game(game):
     main_caption = f"{header}\n\n"
     main_caption += f"📌 <b>Название:</b> {title}\n"
     main_caption += f"🌐 <b>Магазин:</b> {platform}\n\n"
-    
+
     if is_free:
         if worth > 0:
             main_caption += f"💳 Без раздачи: <s>${worth:.2f}</s>\n"
         main_caption += f"🎁 Сейчас: <b>0₽ [БЕСПЛАТНО]</b>\n\n"
     else:
         main_caption += f"🏷️ <b>Цена по скидке:</b> {price_raw}\n\n"
-        
+
     if desc:
         main_caption += f"📖 <b>Кратко об игре:</b>\n<i>{desc}</i>\n\n"
-        
+
     main_caption += final_tags
 
     main_markup = {
@@ -162,27 +162,27 @@ def process_and_send_game(game):
     vk_caption = f"{vk_header}\n\n"
     vk_caption += f"📌 Игра: {title}\n"
     vk_caption += f"🌐 Площадка: {platform}\n"
-    
+
     if is_free:
         if worth > 0:
             vk_caption += f"💳 Обычная цена: ${worth:.2f} ➡️ 0₽\n"
         vk_caption += f"🎁 Статус: 100% БЕСПЛАТНО\n\n"
     else:
         vk_caption += f"🏷️ Цена: {price_raw}\n\n"
-        
+
     if desc:
         vk_caption += f"📖 Об игре:\n{desc}\n\n"
-        
+
     vk_caption += f"───────────────\n"
     vk_caption += f"🔻 {random.choice(VK_LINK_TEXTS)} 🔻\n"
     vk_caption += f"{link}\n"
     vk_caption += f"───────────────\n\n"
-    
+
     vk_caption += f"✈️ Больше эксклюзивной халявы в нашем Telegram-канале:\n"
     vk_caption += f"👉 {TG_CHANNEL_URL}\n\n"
     vk_caption += f"⚡ Хочешь узнавать о раздачах прямо на рабочем столе ПК?\n"
     vk_caption += f"💻 Скачивай нашу программу: {APP_LINK}\n\n"
-    
+
     vk_caption += final_tags
 
     # ==========================================
@@ -231,12 +231,12 @@ def main():
     print("🤖 Запуск парсера GameGiveawaysPro...")
     api = GameAPI(usegamerpower=True)
     nm = NotificationManager(parent=None)
-    
+
     raw_free = []
     for func in [api.fetch_cheapshark_free, api.fetch_gamerpower_pc, api.fetch_gamerpower_loot]:
         try: raw_free.extend(func(15))
         except: pass
-    
+
     free_games = [g for g in raw_free if str(g.get("price", "")).strip().upper() == "FREE" and "gacha" not in g.get("platformkey", "") and "mobile" not in g.get("platformkey", "")]
     new_freebies = get_unseen_items(nm, free_games)
 
@@ -273,4 +273,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
