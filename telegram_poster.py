@@ -28,7 +28,7 @@ POPULAR_TAGS = [
 ]
 
 # ==========================================
-# ФИРМЕННЫЕ БАННЕРЫ С GITHUB
+# ФИРМЕННЫЕ БАННЕРЫ (заглушки)
 # ==========================================
 FALLBACK_IMAGES = {
     "steam": "https://raw.githubusercontent.com/TaJIanT/GameGiveawaysPro/main/images/IMG_20260819_091450.png",
@@ -58,7 +58,7 @@ HEADERS_MOBILE = ["📱 <b>ЛУТ ДЛЯ МОБИЛОК</b>", "🎯 <b>МОБИ�
 HEADERS_STEAM_NEW = ["🎮 <b>СВЕЖИЙ РЕЛИЗ В STEAM</b>", "🚀 <b>НОВИНКА В МАГАЗИНЕ</b>"]
 
 BTN_GET_GAME = ["🎮 Забрать игру", "⚡️ Залутать сейчас", "🔥 Добавить в библиотеку", "🎯 Перейти к раздаче"]
-BTN_GET_APP = ["💻 Наш авто-трекер на ПК", "🚀 Скачать GameGiveawaysPro", "🔔 Не пропускать раздачи (ПК)"]
+BTN_GET_APP = ["💻 Наш авто-трекер на ПК", "🚀 Скачать Eternal Paradise", "🔔 Не пропускать раздачи (ПК)"]
 
 # ==========================================
 # СЛОВАРИ ДЛЯ ВКОНТАКТЕ
@@ -228,7 +228,7 @@ def main():
         print("❌ ОШИБКА: Секреты не найдены!")
         sys.exit(1)
 
-    print("🤖 Запуск парсера GameGiveawaysPro...")
+    print("🤖 Запуск парсера Eternal Paradise...")
     api = GameAPI(usegamerpower=True)
     nm = NotificationManager(parent=None)
 
